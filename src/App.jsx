@@ -1,35 +1,52 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import "./App.css";
 
-function App() {
-  const [count, setCount] = useState(0)
-
-  return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+export function inputType(value) {
+  // Check if it's a string that can be converted to a valid number
+  if (typeof value === "string" && value.trim() !== "" && !isNaN(value)) {
+    return "number";
+  } else if (typeof value === "string") {
+    return "string";
+  } else if (typeof value === "number") {
+    return "number";
+  } else {
+    return "unknown";
+  }
 }
 
-export default App
+export function myPromise(shouldResolve = true) {
+  return new Promise((resolve, reject) => {
+    if (shouldResolve) {
+      resolve("Promise resolved");
+    } else {
+      reject("Promise rejected");
+    }
+  });
+}
+
+export function onlyNumbers(num) {
+  if (typeof num !== "number") {
+    throw new Error("Input must be a number");
+  }
+  return num;
+}
+
+export function fetchUserData(userId) {
+  return fetch(`https://jsonplaceholder.typicode.com/users/${userId}`).then(
+    (response) => {
+      if (!response.ok) {
+        throw new Error("Network response was no gud owo");
+      }
+      return response.json();
+    }
+  );
+}
+
+function App() {
+  return (
+    <>
+      <h1>Hello, Vitest!</h1>
+    </>
+  );
+}
+
+export default App;
